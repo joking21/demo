@@ -3,12 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const UglifyJsPlugin=require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin") 
 
 module.exports = {
     stats: 'errors-only',
     entry: './src/main.js',//值可以是字符串、数组或对象
     output: {
-        path: path.resolve(__dirname, './public/dist'),//Webpack结果存储
+        path: path.resolve(__dirname, './dist'),//Webpack结果存储
         filename: 'build.js' //[name.js]
     },
     module: {
@@ -30,9 +31,12 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                loader: "style-loader!css-loader"
-            },
+                　　  test: /\.css$/,
+                　　  use: [
+                  　　  　　MiniCssExtractPlugin.loader,
+                  　　 　　 "css-loader"
+                 　　 ]
+              　　  },
             {
                 test: /\.scss$/,
                 loaders: ['style-loader', 'css-loader', 'sass-loader']
@@ -57,6 +61,10 @@ module.exports = {
            template: 'index.html'
         }),
         new VueLoaderPlugin(),
+        new MiniCssExtractPlugin({
+        　　filename: "[name].[chunkhash:8].css",
+        　　chunkFilename: "[id].css"
+    　　 })
     ],
     optimization: {
         minimizer: [

@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const UglifyJsPlugin=require('uglifyjs-webpack-plugin');
-
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 //配置webpack服务器启动的端口
 const webpackServer = {  
     protocol:'http://',  
@@ -14,7 +14,7 @@ module.exports = {
     stats: 'errors-only',
     entry: './src/main.js',//值可以是字符串、数组或对象
     output: {
-        path: path.resolve(__dirname, './public/dist'),//Webpack结果存储
+        path: path.resolve(__dirname, './dist'),//Webpack结果存储
         filename: 'build.js' //[name.js]
     },
     module: {
@@ -37,7 +37,11 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: "style-loader!css-loader"
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                  })
+                // loader: "style-loader!css-loader"
             },
             {
                 test: /\.scss$/,
@@ -81,6 +85,7 @@ module.exports = {
             template: 'index.html'
          }),
         new VueLoaderPlugin(),
+        new ExtractTextPlugin("./dist/styles.css"),
       ],
     optimization: {
         minimizer: [
