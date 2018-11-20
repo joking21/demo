@@ -1,21 +1,16 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const UglifyJsPlugin=require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-//配置webpack服务器启动的端口
-const webpackServer = {  
-    protocol:'http://',  
-    host:'localhost',   
-    port:'5000'    //端口号
-}  
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 module.exports = {
     stats: 'errors-only',
     entry: './src/main.js',//值可以是字符串、数组或对象
     output: {
         path: path.resolve(__dirname, './dist'),//Webpack结果存储
-        filename: 'build.js' //[name.js]
+        filename: '[name].[hash:8].js'
     },
     module: {
         rules: [
@@ -36,64 +31,71 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                  })
-                // loader: "style-loader!css-loader"
-            },
+            　　 test: /\.css$/,
+            　　 use: [
+                　　  　MiniCssExtractPlugin.loader,
+                　　 　  "css-loader"
+                　　]
+            　　 },
             {
                 test: /\.scss$/,
                 loaders: ['style-loader', 'css-loader', 'sass-loader']
-            },
+              },
               {
                 test: /\.(jpe?g|png|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/, 
                 loader: 'url-loader?limit=100000'
               }
         ]
     },
+    devServer: {
+        contentBase: path.join(__dirname, "dist"),
+        compress: true,
+        hot: true,
+        port: 9000,
+        // host: "0.0.0.0",    // 若希望服务器外部可以访问则是0.0.0.0，默认localhost
+        proxy: {
+            // http://localhost:3000/requires/selectAll
+            '/api': {
+                target: 'http://localhost:3000',
+                changeOrigin: true,
+                pathRewrite: {
+                '^requires': ''
+                }
+            }
+        }, 
+      },
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.esm.js'
         }
     },
-    devServer: {//webpack-dev-server配置
-        historyApiFallback: true,//不跳转
-        hot: true,
-        inline: true,//实时刷新
-        progress: true,
-        port: webpackServer.port,
-        host:webpackServer.host,
-        proxy: {
-            '/api': {
-                target: 'http://localhost:7000',
-                changeOrigin: true,
-                pathRewrite: {
-                '^requires': '/api'
-                }
-            }
-        }, 
-    },
-    
     performance: {
         hints: false
     },
-    devtool: '#cheap-module-eval-source-map',
+    devtool: '#cheap-module-source-map',
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'index.html'
-         }),
+           template: 'index.html'
+        }),
         new VueLoaderPlugin(),
-        new ExtractTextPlugin("./dist/styles.css"),
-      ],
+        new MiniCssExtractPlugin({
+        　　filename: "[name].[chunkhash:8].css",
+        　　chunkFilename: "[id].css"
+    　　 }),
+    ],
     optimization: {
         minimizer: [
             new UglifyJsPlugin({
                 uglifyOptions: {
-                    compress: false
+                    compress: false,
+                    warnings: false,
+                    drop_console: false,
                 }
-            })
+            }),
+            // new CommonsChunkPlugin({
+            //     name: 'vendor',
+            //     filename: 'vendor-[hash].min.js',
+            // }),
         ]
     },
 }
