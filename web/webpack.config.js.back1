@@ -4,8 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const UglifyJsPlugin=require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-module.exports = env => {
+module.exports = (test, env) => {
+    console.log(env.mode);
     return{
         // stats: 'errors-only',
         entry: './src/main.js',//值可以是字符串、数组或对象
@@ -74,8 +76,9 @@ module.exports = env => {
         performance: {
             hints: false
         },
-        devtool: env.NODE_ENV === 'development'?'#cheap-module-eval-source-map':'#cheap-module-source-map',
+        devtool: env.mode === 'development'?'#cheap-module-eval-source-map':'#cheap-module-source-map',
         plugins: [
+            new CleanWebpackPlugin(['dist']),
             new HtmlWebpackPlugin({
                template: 'index.html'
             }),
