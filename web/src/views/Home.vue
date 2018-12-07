@@ -5,13 +5,17 @@
       <ol>
         <li v-for="todo in todos">{{ todo.text }}</li>
       </ol>
-      <img src="../../../assets/bridge.png" />
+       <!-- <img src="./assets/bridge.png" /> -->
+       <!-- <img src="./../assets/bridge.png" /> -->
+       <img src="../assets/bridge.png" />
+      <!-- <img src="D:\practiceByme\demo\web\src\views\page" /> -->
       <button @click="eClick()">事ffvvd件1</button>
     </div>
   </div>
 </template>
    
   <script >
+  //  import tt from '../../assets/bridge.png';
     export default {
     name: "indexP",
     data() {

@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import homePage from './views/page/home.vue'
-import aboutPage from './views/page/about.vue'
-import login from './views/page/login.vue'
+import homePage from './views/Home.vue'
+import aboutPage from './views/About.vue'
+import login from './views/Login.vue'
 Vue.use(Router)
 
 export default new Router({
