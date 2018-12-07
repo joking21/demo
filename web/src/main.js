@@ -4,7 +4,7 @@ import router from './routes.js'
 import Vuex from 'vuex'
 import 'iview/dist/styles/iview.css';
 // import './assets/css/base.css'
-import './css/main.less'
+import './css/main.css'
 import store from './store/index'
 Vue.use(Vuex);
 Vue.config.debug = true;//开启错误提示

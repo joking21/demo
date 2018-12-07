@@ -1,37 +1,33 @@
 <template>
-<div>
+  <div>
     <tab-header></tab-header>
     <div class="tempList">
-        <ol>
-            <li v-for="todo in todos">
-                {{ todo.text }}
-            </li>
-        </ol>
-        <button @click="eClick()">事ffvvd件1</button>
+      <ol>
+        <li v-for="todo in todos">{{ todo.text }}</li>
+      </ol>
+      <img src="../../../assets/bridge.png" />
+      <button @click="eClick()">事ffvvd件1</button>
     </div>
-</div>
+  </div>
 </template>
-<script type="text/javascript" src="test.js"></script>
+   
   <script >
-// import TabHeader from '../common/header.vue';
-// export default {
-//   name: 'indexP',
-//   data () {
-//     return {
-//        todos: [
-//           { text: 'Learn JavaScript' },
-//           { text: 'Learn Vue' },
-//           { text: 'Build something awesome' }
-//         ]
-//     }
-//   },
-//   methods:{
-//     eClick(){
-//         console.log(9999);
-//     }
-//   },
-//   components:{
-//       TabHeader,
-//   }
-// }
+    export default {
+    name: "indexP",
+    data() {
+        return {
+        todos: [
+            { text: "Learn JavaScript" },
+            { text: "Learn Vue" },
+            { text: "Build something awesome" }
+        ]
+        };
+    },
+    methods: {
+        eClick() {
+        console.log(9999);
+        }
+    },
+    components: {}
+ };
 </script>
