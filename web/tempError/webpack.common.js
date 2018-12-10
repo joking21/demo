@@ -31,7 +31,15 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    // MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                          // you can specify a publicPath here
+                          // by default it use publicPath in webpackOptions.output
+                          outputPath: 'styles/'
+                        }
+                      },
                     "css-loader"
                 ]
             },
@@ -39,7 +47,15 @@ module.exports = {
                 test: /\.less$/,
                 // loaders: ['style-loader', 'css-loader', 'less-loader']
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    // MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                          // you can specify a publicPath here
+                          // by default it use publicPath in webpackOptions.output
+                          outputPath: 'styles/'
+                        }
+                      },
                     'css-loader', 'less-loader'
                 ]
             },
@@ -63,7 +79,7 @@ module.exports = {
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: "styles/[name].[chunkhash:8].css",
+            filename: "[name].[chunkhash:8].css",
             chunkFilename: "[id].css"
         }),
     ],

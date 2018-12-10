@@ -9,16 +9,16 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),//Webpack结果存储
         filename: '[name].[hash:8].js'
     },
-    // resolve: {
-    //     alias: {
-    //       assets: path.resolve(__dirname, './src/assets'),
-    //       components: path.resolve(__dirname, './src/components'),
-    //       common: path.resolve(__dirname, './src/common'),
-    //       store: path.resolve(__dirname, './src/store'),
-    //       css: path.resolve(__dirname, './src/css'),
-    //       views: path.resolve(__dirname, './src/views'),
-    //     }
-    //   },
+    resolve: {
+        alias: {
+            assets: path.resolve(__dirname, './src/assets'),
+            components: path.resolve(__dirname, './src/components'),
+            common: path.resolve(__dirname, './src/common'),
+            store: path.resolve(__dirname, './src/store'),
+            css: path.resolve(__dirname, './src/css'),
+            views: path.resolve(__dirname, './src/views'),
+        }
+    },
     module: {
         rules: [
             {
@@ -41,12 +41,18 @@ module.exports = {
                 }],
             },
             {
-                test: /\.css/,
-                loader: ExtractTextPlugin.extract('css-loader')  // 单独打包出CSS，这里配置注意下
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader']
+                })
             },
             {
-                test: /\.less/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'less-loader') 
+                test: /\.less$/,
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'less-loader']
+                })
             },
         ]
     },
@@ -63,6 +69,5 @@ module.exports = {
             template: 'index.html'
         }),
         new VueLoaderPlugin(),
-        // new Ex("【name】.css")
     ],
 }
