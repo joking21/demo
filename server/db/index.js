@@ -1,8 +1,10 @@
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-  host     : '***',
-  user     : '***',
-  password : '***',
-  database : 'my_db'
-});
-export default connection;
+
+module.exports = {
+  mysql:{
+      host:'***',
+      user:'***',
+      password:'***',
+      database:'***',
+      port: 3306
+  }
+};

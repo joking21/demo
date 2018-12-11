@@ -13,11 +13,11 @@ module.exports = merge(common, {
         stats: 'errors-only',  //只在发生错误时输出
         // host: "0.0.0.0",    // 若希望服务器外部可以访问则是0.0.0.0，默认localhost
         proxy: {
-            '/api': {
+            '/dw': {
                 target: 'http://localhost:3000',
                 changeOrigin: true,
                 pathRewrite: {
-                    '^requires': ''
+                    '^dw': ''
                 }
             }
         },

@@ -2,9 +2,9 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './routes.js';
 import Vuex from 'vuex';
+import store from './store/index';
 import 'iview/dist/styles/iview.css';
 import './css/main.less';
-import store from './store/index';
 Vue.use(Vuex);
 Vue.config.debug = true;//开启错误提示
 
