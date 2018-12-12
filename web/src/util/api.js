@@ -1,7 +1,6 @@
-const prefix = '/dw';
 const api = {
    Login: {
-       userAdd: `${prefix}/users/add`,
+       userAdd: '/users/add',
     }
 }
 export default api;

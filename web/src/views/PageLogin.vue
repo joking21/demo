@@ -9,12 +9,12 @@ import { postData } from "../util/request";
 import Login from "../components/pageLogin/Login.vue";
 // import
 export default {
+  name: "PageLogin",
   data() {
     return {
       postData: postData,
     }
   },
-  name: "PageLogin",
   components: {
     Login,
   }

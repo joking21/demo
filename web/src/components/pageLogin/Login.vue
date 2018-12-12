@@ -1,11 +1,14 @@
+
 <template>
   <div>
     <input type="text" v-model="name">
     <input type="password" v-model="pass">
     <button @click="submitFun()">提交</button>
+    <Button type="primary" plain>默认按钮</Button>
   </div>
 </template>
 <script>
+import { Button } from 'element-ui';
 export default {
   data() {
     return {
@@ -14,6 +17,9 @@ export default {
     };
   },
   props:['postData'],
+  components: {
+    Button,
+  },
   methods: {
     submitFun() {
       console.log(this.name);
@@ -26,3 +32,4 @@ export default {
   }
 };
 </script>
+

@@ -10,7 +10,7 @@
        <img src="../assets/bridge.png" />
       <!-- <img src="D:\practiceByme\demo\web\src\views\page" /> -->
       <button @click="eClick()">事ffvvd件1</button>
-      <!-- <a href="/login">eeee</a> -->
+      <a href="/login">eeee</a>
     </div>
   </div>
 </template>

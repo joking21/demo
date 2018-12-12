@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -17,12 +18,15 @@ module.exports = merge(common, {
                 target: 'http://localhost:3000',
                 changeOrigin: true,
                 pathRewrite: {
-                    '^dw': ''
+                    '^/dw': ''
                 }
             }
         },
     },
     plugins: [
-        new ExtractTextPlugin("styles/[name].css")
+        new ExtractTextPlugin("styles/[name].css"),
+        new webpack.DefinePlugin({
+            "process.env": require('./config/dev.env.js')
+        })
     ],
 });

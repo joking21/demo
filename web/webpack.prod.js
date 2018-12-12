@@ -12,6 +12,9 @@ module.exports = merge(common, {
         new CleanWebpackPlugin(['dist']),
         new ExtractTextPlugin("styles/[name].[chunkhash:8].css"),
         new webpack.optimize.CommonsChunkPlugin('js/common.js'),
+        new webpack.DefinePlugin({
+            "process.env": require('./config/prod.env.js')
+        }),
         new ParallelUglifyPlugin({
             uglifyJS: {
                 output: {
