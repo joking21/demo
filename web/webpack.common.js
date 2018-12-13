@@ -37,6 +37,7 @@ module.exports = {
                     options: {
                         limit: 50,
                         outputPath: 'assets/',
+                        publicPath: '/assets',
                     },
                 }],
             },

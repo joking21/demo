@@ -5,6 +5,7 @@ import Vuex from 'vuex';
 import store from './store/index';
 import 'element-ui/lib/theme-chalk/index.css';
 import './css/main.less';
+import './assets/fonts/iconfont.css';
 Vue.use(Vuex);
 Vue.config.debug = true;//开启错误提示
 

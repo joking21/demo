@@ -5,6 +5,7 @@
 </template>
 <script>
 // 导入组件
+import '../css/PageLogin.less'
 import { postData } from "../util/request";
 import Login from "../components/pageLogin/Login.vue";
 // import
