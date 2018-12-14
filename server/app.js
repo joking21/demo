@@ -4,6 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+// var privateKey  = fs.readFileSync('./bin/wstart.top.key', 'utf8');
+// var certificate = fs.readFileSync('./bin/fullchain.cer', 'utf8');
+// var credentials = {key: privateKey, cert: certificate};
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <Login :postData="postData"></Login>
+    <Login :getData="getData"></Login>
   </div>
 </template>
 <script>
 // 导入组件
 import '../css/PageLogin.less'
-import { postData } from "../util/request";
+import { postData, getData } from "../util/request";
 import Login from "../components/pageLogin/Login.vue";
 // import
 export default {
@@ -14,10 +14,13 @@ export default {
   data() {
     return {
       postData: postData,
+      getData: getData,
     }
   },
   components: {
     Login,
+    // postData,
+    // getData,
   }
 };
 </script>

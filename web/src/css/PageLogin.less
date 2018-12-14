@@ -10,6 +10,7 @@
     margin: auto;
     text-align: center;
     z-index: 100;
+    box-shadow: 0 0 5px rgba(255,255,255,0.5);
     .login-model{
         position: absolute;
         left: 0;
@@ -17,14 +18,14 @@
         top: 48%;
     }
     input{
+        padding: 0 36px !important;
         font-size: 16px;
-        padding: 0 10px;
         margin: 0 auto;
         color: #0FF;
         border: 1px solid #177d9c !important;
         display: block;
         height: 33px;
-        width: 330px;
+        width: 287px;
         margin-bottom: 10px;
         outline: 0;
         background-color: rgba(255, 255, 255, 0.3);
@@ -33,12 +34,18 @@
         color: #0FF;
         font-size: 16px;
     }
-   .login-icon{
+    .login-icon{
         position: absolute;
         margin-top: -44px;
         left: 79%;
         font-size: 30px;
         color: #0FF;
         cursor: pointer;
-   }    
+    }
+    .login-name, .login-password{
+            position: absolute;
+            left: 15%;
+            font-size: 30px;
+            color: #0FF;
+    }  
 }

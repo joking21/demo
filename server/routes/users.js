@@ -8,4 +8,7 @@ router.get('/selectAll', function(req, res, next) {
 router.post('/add', function(req, res, next) {
   users.add(req, res, next);
 });
+router.get('/login', function(req, res, next){
+  users.selectUser(req, res, next);
+})
 module.exports = router;

@@ -4,9 +4,11 @@
     <BgTest></BgTest>
     <div class="login-btn">
       <div class="login-model">
-        <input type="text" v-model="name" placeholder="用户名">
-        <input style="padding-right: 30px; width: 310px;" type="password" v-model="pass" placeholder="密码">
-        <i class="login-icon iconfont icon-denglu1" />
+        <i class="login-name iconfont icon-yonghuming" title="用户名"/>
+        <input type="text" v-model="name">
+        <i class="login-password iconfont icon-mima" title="密码"/>
+        <input type="password" v-model="pass">
+        <i class="login-icon iconfont icon-denglu" @click="submitFun()"/>
       </div>
     </div>
   </div>
@@ -21,19 +23,19 @@ export default {
       pass: ""
     };
   },
-  props: ["postData"],
+  props: ["getData"],
   components: {
     Button,
     BgTest: BgTest
   },
   methods: {
     submitFun() {
-      console.log(this.name);
-      this.postData("Login.userAdd", { name: this.name, password: this.pass });
-      //    const $this = this;
-      //    sessionStorage.setItem("token", $this.name);
-      //    $this.$store.commit('changeName');
-      //    location.href='/';
+      this.getData("PageLogin.login", { name: this.name, password: this.pass }, this.dealUser);
+    },
+    dealUser() {
+      // sessionStorage.setItem("token", this.name);
+      // this.$store.commit("changeName");
+      // location.href = "/";
     }
   }
 };
