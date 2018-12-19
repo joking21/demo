@@ -1,7 +1,7 @@
 import axios from "axios";
 import api from "./api";
 import notice from './notice';
-const prefix = process.env.NODE_ENV === "development" ? '/dw' : '';
+const prefix = process.env.NODE_ENV === "development" ? '/dw' : '/api';
 export function postData(url, para, fun) {
     const urlParent = url.split('.')[0];
     const childParent = url.split('.')[1];

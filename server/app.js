@@ -3,19 +3,19 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-// var privateKey  = fs.readFileSync('./bin/wstart.top.key', 'utf8');
-// var certificate = fs.readFileSync('./bin/fullchain.cer', 'utf8');
-// var credentials = {key: privateKey, cert: certificate};
+const engines = require('consolidate');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
-// const dw = '/dw';
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'pug');
+
+app.engine('html', engines.mustache);
+app.set('view engine', 'html');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

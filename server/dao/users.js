@@ -26,9 +26,12 @@ module.exports = {
         });
     },
     selectUser: function (req, res, next) {
+        console.log('ttttttttt');
         pool.getConnection(function(err, connection) {
             var param = req.query;
             connection.query(_sql.selectUser, [param.name, param.password], function(err, result) {
+                console.log('err',err);
+                console.log(result);
                 if(result.length === 0){
                     res.json({
                         code: 404,

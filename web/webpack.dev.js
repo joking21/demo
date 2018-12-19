@@ -15,7 +15,7 @@ module.exports = merge(common, {
         // host: "0.0.0.0",    // 若希望服务器外部可以访问则是0.0.0.0，默认localhost
         proxy: {
             '/dw': {
-                target: 'http://localhost:3000',
+                target: 'https://localhost:7000',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/dw': ''
