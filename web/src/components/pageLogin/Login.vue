@@ -33,9 +33,9 @@ export default {
       this.getData("PageLogin.login", { name: this.name, password: this.pass }, this.dealUser);
     },
     dealUser() {
-      // sessionStorage.setItem("token", this.name);
-      // this.$store.commit("changeName");
-      // location.href = "/";
+      sessionStorage.setItem("token", this.name);
+      this.$store.commit("changeName");
+      location.href = "/";
     }
   }
 };

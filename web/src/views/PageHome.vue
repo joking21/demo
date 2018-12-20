@@ -1,37 +1,36 @@
 <template>
   <div>
-    <tab-header></tab-header>
-    <div class="tempList">
-      <ol>
+    <!-- <tab-header></tab-header> -->
+    <Header />
+    <div class="content">
+      首页
+      <!-- <ol>
         <li v-for="todo in todos">{{ todo.text }}</li>
       </ol>
-       <!-- <img src="./assets/bridge.png" /> -->
-       <!-- <img src="./../assets/bridge.png" /> -->
-       <img src="../assets/bridge.png" />
-      <!-- <img src="D:\practiceByme\demo\web\src\views\page" /> -->
+
+      <img src="../assets/bridge.png">
+
       <button @click="eClick()">事ffvvd件1</button>
-      <a href="/login">eeee</a>
+      <a href="/login">eeee</a> -->
     </div>
   </div>
 </template>
    
   <script >
-    export default {
-    name: "indexP",
-    data() {
-        return {
-        todos: [
-            { text: "Learn JavaScript" },
-            { text: "Learn Vue" },
-            { text: "Build something awesome" }
-        ]
-        };
-    },
-    methods: {
-        eClick() {
-        console.log(9999);
-        }
-    },
-    components: {}
- };
+  import '../css/PageHome.less' 
+  import Header from '../common/Header.vue';
+export default {
+  name: "indexP",
+  data() {
+    return {
+
+    };
+  },
+  methods: {
+
+  },
+  components: {
+    Header,
+  }
+};
 </script>

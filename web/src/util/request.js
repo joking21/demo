@@ -2,14 +2,17 @@ import axios from "axios";
 import api from "./api";
 import notice from './notice';
 const prefix = process.env.NODE_ENV === "development" ? '/dw' : '/api';
-export function postData(url, para, fun) {
+function parseUrl(url) {
     const urlParent = url.split('.')[0];
     const childParent = url.split('.')[1];
     const tempUrl = api[urlParent][childParent];
-    axios.post(prefix+tempUrl, para)
+    return prefix + tempUrl;
+}
+export function postData(url, para, fun) {
+    axios.post(parseUrl(url), para)
         .then(function (response) {
             notice.methods.success(response.data.msg);
-            if(fun) fun();
+            if (fun) fun();
             // if(response.data.code === 200){
             //     notice.methods.success(response.data.msg);
             //     if(fun) fun();
@@ -23,21 +26,18 @@ export function postData(url, para, fun) {
 }
 
 export function getData(url, para, fun) {
-    const urlParent = url.split('.')[0];
-    const childParent = url.split('.')[1];
-    const tempUrl = api[urlParent][childParent];
-    axios.get(prefix+tempUrl, {
+    axios.get(parseUrl(url), {
         params: para
-      })
-      .then(function (response) {
-        if(response.data.code === 200){
-            notice.methods.success(response.data.msg);
-            if(fun) fun();
-        }else{
-             notice.methods.failer(response.data.msg);
-        }
-      })
-      .catch(function (error) {
-        notice.methods.failer(error.response.data);
-      });
+    })
+        .then(function (response) {
+            if (response.data.code === 200) {
+                notice.methods.success(response.data.msg);
+                if (fun) fun();
+            } else {
+                notice.methods.failer(response.data.msg);
+            }
+        })
+        .catch(function (error) {
+            notice.methods.failer(error.response.data);
+        });
 }
