@@ -93,7 +93,7 @@ export default {
         typeId: this.type,
         power: this.radio
       };
-      // this.postData("PagePublish.addArticle", data, this.changeLoad);
+      this.postData("PagePublish.addArticle", data, this.changeLoad);
     },
     changeLoad() {
       this.loading = false;
