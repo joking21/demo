@@ -1,16 +1,21 @@
 <template>
   <div>
-      <div style="position:absolute; color: #ff0000">haaah</div>
-    <Register></Register>
+    <Header/>
+    <Toobar/>
+    <div class="content">关于</div>
+    <Footer/>
   </div>
 </template>
 <script>
 // 导入组件
-import Register from "../components/pageLogin/Bg.vue";
-// import
+import Header from "../common/Header.vue";
+import Footer from "../common/Footer.vue";
+import Toobar from "../common/Toobar.vue";
 export default {
   components: {
-    Register,
+    Header,
+    Footer,
+    Toobar
   }
 };
 </script>

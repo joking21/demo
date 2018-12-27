@@ -1,15 +1,54 @@
-html, body, div{
+html, body, div, p, a{
     margin:0;
     padding:0;
     border:0;
     outline:0;
-//     font-size:100%;
-//     vertical-align:baseline;
-//     background:transparent
+    font-family: Microsoft YaHei;
+    color: rgb(51, 51, 51);
+}
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+a{
+    text-decoration: none;
 }
 .header{
     // background: linear-gradient(rgb(26,67,210), rgb(169,169,204));
-    background-color: #faf8f0; 
+    flex: 0 0 auto;
+    padding: 0 20px;
+    background-color: #faf8f0;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    .el-menu--horizontal>.el-submenu .el-submenu__title {
+        height: 50px;
+        line-height: 50px;
+        border-bottom: 2px solid transparent;
+        color: #909399;
+    }
+    .el-menu--horizontal>.el-submenu {
+        float: right;
+    }
+    .has-user{
+        text-align: right;
+    }
+    .no-user{
+        text-align: right;
+    }
+}
+.footer{
+    color: #ffffff;
+    height: 30px;
+    width: 100%;
+    background: rgb(57,57,57);
+    line-height: 30px;
+    position: fixed;
+    bottom: 0;
+    font-size: 12px;
+    text-align: center;
+    flex: 0 0 auto;
 }
 .header-menu-itme{
     width: 120px;
@@ -23,4 +62,28 @@ html, body, div{
     .el-submenu.is-active .el-submenu__title{
         border-bottom: none !important;
     }
+}
+.toobar{
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    div{
+        border-bottom: 1px solid #ddd;
+    }
+    a{
+        margin-right: 33px;
+    }
+    a:hover{
+        color:#F5A301;
+    }
+    .router-link-exact-active{
+        color:#F5A301;
+        font-weight: 600;
+    }
+}
+.content{
+    padding: 20px 20px 50px 20px;
+    flex: 1 0 auto;
 }

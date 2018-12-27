@@ -1,36 +1,31 @@
 <template>
   <div>
-    <!-- <tab-header></tab-header> -->
-    <Header />
+    <Header/>
+    <Toobar />
     <div class="content">
-      首页
-      <!-- <ol>
-        <li v-for="todo in todos">{{ todo.text }}</li>
-      </ol>
-
-      <img src="../assets/bridge.png">
-
-      <button @click="eClick()">事ffvvd件1</button>
-      <a href="/login">eeee</a> -->
+       <Article />
     </div>
+    <Footer />
   </div>
 </template>
    
   <script >
-  import '../css/PageHome.less' 
-  import Header from '../common/Header.vue';
+import "../css/PageHome.less";
+import Header from "../common/Header.vue";
+import Footer from "../common/Footer.vue";
+import Toobar from "../common/Toobar.vue";
+import Article from "../components/pageHome/Article.vue"
 export default {
-  name: "indexP",
+  // name: "indexP",
   data() {
-    return {
-
-    };
+    return {};
   },
-  methods: {
-
-  },
+  methods: {},
   components: {
     Header,
+    Footer,
+    Toobar,
+    Article
   }
 };
 </script>

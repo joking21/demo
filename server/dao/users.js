@@ -11,7 +11,7 @@ module.exports = {
     selectall: function (req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query(_sql.selectAll, function(err, result) {
-                _util.jsonWrite(res, result);
+                _util.getJsonWrite(res, result);
                 connection.release();
             });
         });
@@ -20,7 +20,7 @@ module.exports = {
         pool.getConnection(function(err, connection) {
             var param = req.body;
             connection.query(_sql.insert, [param.name, param.password], function(err, result) {
-                _util.jsonWrite(res, result);
+                _util.postJsonWrite(res, result);
                 connection.release();
             });
         });
@@ -37,7 +37,8 @@ module.exports = {
                 }else{
                     res.json({
                         code: 200,
-                        msg: '登录成功！'
+                        msg: '登录成功！',
+                        result:result
                     });
                 }
                 connection.release();

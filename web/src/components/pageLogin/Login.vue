@@ -32,8 +32,8 @@ export default {
     submitFun() {
       this.getData("PageLogin.login", { name: this.name, password: this.pass }, this.dealUser);
     },
-    dealUser() {
-      sessionStorage.setItem("token", this.name);
+    dealUser(res) {
+      sessionStorage.setItem("token", JSON.stringify(res.result[0]));
       this.$store.commit("changeName");
       location.href = "/";
     }

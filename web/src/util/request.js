@@ -1,6 +1,6 @@
 import axios from "axios";
 import api from "./api";
-import notice from './notice';
+import { success, failer } from './notice';
 const prefix = process.env.NODE_ENV === "development" ? '/dw' : '/api';
 function parseUrl(url) {
     const urlParent = url.split('.')[0];
@@ -11,17 +11,15 @@ function parseUrl(url) {
 export function postData(url, para, fun) {
     axios.post(parseUrl(url), para)
         .then(function (response) {
-            notice.methods.success(response.data.msg);
-            if (fun) fun();
-            // if(response.data.code === 200){
-            //     notice.methods.success(response.data.msg);
-            //     if(fun) fun();
-            // }else{
-            //      notice.methods.failer(response.data.msg);
-            // }
+            if (response.data.code === 200) {
+                success(response.data.msg);
+                if (fun) fun();
+            } else {
+                failer(response.data.msg);
+            }
         })
         .catch(function (error) {
-            notice.methods.failer(error.response.data);
+            failer(error.response.data);
         });
 }
 
@@ -31,13 +29,13 @@ export function getData(url, para, fun) {
     })
         .then(function (response) {
             if (response.data.code === 200) {
-                notice.methods.success(response.data.msg);
-                if (fun) fun();
+                success(response.data.msg);
+                if (fun) fun(response.data);
             } else {
-                notice.methods.failer(response.data.msg);
+                failer(response.data.msg);
             }
         })
         .catch(function (error) {
-            notice.methods.failer(error.response.data);
+            failer(error.response.data);
         });
 }

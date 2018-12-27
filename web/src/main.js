@@ -8,7 +8,6 @@ import './css/main.less';
 import './assets/fonts/iconfont.css';
 Vue.use(Vuex);
 Vue.config.debug = true;//开启错误提示
-
 router.beforeEach((to, from, next) => {
   store.commit('changeName');
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
