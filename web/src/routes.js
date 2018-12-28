@@ -5,6 +5,7 @@ import aboutPage from './views/PageAbout.vue';
 import login from './views/PageLogin.vue';
 import publish from './views/PagePublish.vue';
 import leave from './views/PageLeave.vue';
+import articleContent from './views/PageContent.vue';
 
 Vue.use(Router)
 
@@ -36,6 +37,10 @@ export default new Router({
         {
             path:'/leaveam',
             component:leave,
-        }
+        },
+        {
+            path:'/article/detail/:id',
+            component:aboutPage
+        },
     ]
 })
