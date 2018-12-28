@@ -64,12 +64,12 @@ export default {
       content: "<h4>It is a great day!</h4>",
       radio: "1",
       title: "",
-      typeData: [{ id: 1, name: "前端" }, { id: 2, name: "后台" }],
+      typeData: [],
       type: 1,
       loading: false
     };
   },
-  props: ["postData"],
+  props: ["postData", "getData"],
   components: {
     VueEditor,
     Radio,
@@ -79,9 +79,12 @@ export default {
     Select,
     Option
   },
+  created: function() {
+    this.getData("PagePublish.getType", null, this.getType);
+  },
   methods: {
     submitFun() {
-       if (!this.title) {
+      if (!this.title) {
         warningTip("请输入标题");
         return;
       }
@@ -93,10 +96,18 @@ export default {
         typeId: this.type,
         power: this.radio
       };
-      this.postData("PagePublish.addArticle", data, this.changeLoad);
+      this.postData(
+        "PagePublish.addArticle",
+        data,
+        this.changeLoad,
+        this.changeLoad
+      );
     },
     changeLoad() {
       this.loading = false;
+    },
+    getType(res) {
+      this.typeData = res.result;
     }
   }
 };

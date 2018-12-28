@@ -3,7 +3,7 @@
     <Header/>
     <Toobar/>
     <div class="content">
-      <Publish :postData="postData" />
+      <Publish :postData="postData" :getData="getData" />
     </div>
     <Footer/>
   </div>
@@ -14,11 +14,12 @@ import Header from "../common/Header.vue";
 import Footer from "../common/Footer.vue";
 import Toobar from "../common/Toobar.vue";
 import Publish from "../components/pagePublish/Publish.vue";
-import { postData } from "../util/request";
+import { postData, getData } from "../util/request";
 export default {
   data() {
     return {
       postData: postData,
+      getData: getData,
     };
   },
   components: {

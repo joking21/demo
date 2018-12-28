@@ -8,34 +8,38 @@ function parseUrl(url) {
     const tempUrl = api[urlParent][childParent];
     return prefix + tempUrl;
 }
-export function postData(url, para, fun) {
+export function postData(url, para, successFun, errorFun) {
     axios.post(parseUrl(url), para)
         .then(function (response) {
             if (response.data.code === 200) {
                 success(response.data.msg);
-                if (fun) fun();
+                if (successFun) successFun();
             } else {
+                if (errorFun) errorFun();
                 failer(response.data.msg);
             }
         })
         .catch(function (error) {
+            if (errorFun) errorFun();
             failer(error.response.data);
         });
 }
 
-export function getData(url, para, fun) {
+export function getData(url, para, successFun, errorFun) {
     axios.get(parseUrl(url), {
         params: para
     })
         .then(function (response) {
             if (response.data.code === 200) {
-                success(response.data.msg);
-                if (fun) fun(response.data);
+                // success(response.data.msg);
+                if (successFun) successFun(response.data);
             } else {
+                if (errorFun) errorFun();
                 failer(response.data.msg);
             }
         })
         .catch(function (error) {
+            if (errorFun) errorFun();
             failer(error.response.data);
         });
 }
