@@ -7,7 +7,8 @@ module.exports = {
     entry: './src/main.js',//值可以是字符串、数组或对象
     output: {
         path: path.resolve(__dirname, './dist'),//Webpack结果存储
-        filename: '[name].[hash:8].js'
+        filename: '[name].[hash:8].js',
+        publicPath: '/',
     },
     resolve: {
         alias: {

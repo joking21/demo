@@ -39,8 +39,9 @@ export default new Router({
             component:leave,
         },
         {
+            name: 'articleContent',
             path:'/article/detail/:id',
-            component:aboutPage
+            component:articleContent
         },
     ]
 })
