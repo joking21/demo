@@ -10,32 +10,9 @@
     </div>
     <div v-else class="no-user">
       <a href="/login">登录</a>&nbsp;|&nbsp;
-      <a>注册</a>
+      <a href="/register">注册</a>
     </div>
   </div>
-  <!-- <div>
-    <div class="header">
-      <Row v-if="token">
-        <Col :span="2" :offset="22">
-          <Menu class="el-menu-demo header-menu-demo" mode="horizontal">
-            <Submenu index="1">
-              <template slot="title">{{token}}</template>
-              <MenuItem class="header-menu-itme" index="1-1" @click="loginOut()">退出</MenuItem>
-            </Submenu>
-          </Menu>
-        </Col>
-      </Row>
-      <Row v-else>
-        <Col :span="2" :offset="22">
-          <a href="/login">登录</a>&nbsp;|&nbsp;<a>注册</a>
-        </Col>
-      </Row>
-    </div>
- <Carousel arrow="always">
-      <CarouselItem v-for="item in 3" :key="item" :class="'baner'+item">
-      </CarouselItem>
-    </Carousel>
-  </div>-->
 </template>
 <script>
 import {
@@ -62,7 +39,7 @@ export default {
     loginOut() {
       sessionStorage.removeItem("token");
       this.$store.commit("changeName");
-      // location.href = "/login";
+      location.reload();
     }
   },
   computed: {

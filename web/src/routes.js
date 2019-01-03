@@ -6,7 +6,7 @@ import login from './views/PageLogin.vue';
 import publish from './views/PagePublish.vue';
 import leave from './views/PageLeave.vue';
 import articleContent from './views/PageContent.vue';
-
+import Register from './views/PageRegister.vue';
 Vue.use(Router)
 
 export default new Router({
@@ -28,11 +28,15 @@ export default new Router({
             }
         },
         {
+            path:'/register',
+            component:Register,
+        },
+        {
             path:'/publish',
             component:publish,
-            // meta:{
-            //     loginIs:true
-            // }
+            meta:{
+                requireAuth:true
+            }
         },
         {
             path:'/leaveam',

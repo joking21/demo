@@ -10,7 +10,8 @@ export function success(msg) {
 export function failer(msg) {
     Notification({
         title: '错误',
-        message: msg,
+        dangerouslyUseHTMLString: true,
+        message: '<div v-html='+msg+'></div>',
         type: 'error',
         duration: 3000,
     });

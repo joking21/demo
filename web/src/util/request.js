@@ -31,7 +31,6 @@ export function getData(url, para, successFun, errorFun) {
     })
         .then(function (response) {
             if (response.data.code === 200) {
-                // success(response.data.msg);
                 if (successFun) successFun(response.data);
             } else {
                 if (errorFun) errorFun();
