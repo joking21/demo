@@ -7,6 +7,8 @@ import publish from './views/PagePublish.vue';
 import leave from './views/PageLeave.vue';
 import articleContent from './views/PageContent.vue';
 import Register from './views/PageRegister.vue';
+import article from './views/PageArticle.vue';
+
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +48,10 @@ export default new Router({
             name: 'articleContent',
             path:'/article/detail/:id',
             component:articleContent
+        },
+        {
+            path:'/article',
+            component:article
         },
     ]
 })

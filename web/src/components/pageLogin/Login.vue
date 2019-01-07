@@ -9,6 +9,8 @@
         <i class="login-password iconfont icon-mima" title="密码"/>
         <input type="password" v-model="pass">
         <i class="login-icon iconfont icon-denglu" @click="submitFun()"/>
+      </div>
+      <div style="position: absolute; bottom: 10px; right: 0px;">
         <router-link to="/register">
           <p style="color: #0FF; text-align: right; padding-right: 50px; font-size: 14px;">没有账号，去注册</p>
         </router-link>

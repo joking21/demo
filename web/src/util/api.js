@@ -16,7 +16,8 @@ const api = {
     },
     // 所有文章
     PageArticle: {
-         getContent: '/articles/article/info' //详情
-    }
+         getContent: '/articles/article/info', //详情
+         getList: '/articles/article/all'
+    },
 }
 export default api;

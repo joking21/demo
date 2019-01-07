@@ -15,4 +15,7 @@ router.get('/new/article', function(req, res, next) {
 router.get('/article/info', function(req, res, next) {
   article.getContent(req, res, next);
 });
+router.get('/article/all', function(req, res, next) {
+  article.getAllArticle(req, res, next);
+});
 module.exports = router;

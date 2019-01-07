@@ -1,6 +1,12 @@
 <template>
   <div class="d-module">
-    <p class="title">最新动态</p>
+    <div>
+      <span class="title">最新动态</span> 
+      <span>
+        <router-link to='/article'>+More</router-link>
+      </span>
+    </div>
+      
     <div class="new-info" v-for="item in articleList">
       <div class="info-title">
         <router-link :to="`/article/detail/${item.id}`">{{item.title}}</router-link>
@@ -30,7 +36,6 @@ export default {
   methods: {
     dealArticle(res) {
       this.articleList = res.result;
-      console.log(this.articleList);
     },
     dealContent(html) {
       const dd = html.replace(/<\/?.+?>/g, "");
