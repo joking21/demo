@@ -7,11 +7,11 @@
       <div class="info-content">{{dealContent(item.content)}}</div>
       <div class="info-attribute">
         <span>作者：{{item.userName}}</span>
-        <span>时间：{{TimeConversion(item.time)}}</span>
+        <span>时间：{{item.time}}</span>
         <span>类型：{{item.typeName}}</span>
       </div>
     </div>
-    <div style="padding: 15px; text-align: right;">
+    <div style="text-align: right;">
       <Pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -19,7 +19,7 @@
         :page-sizes="[10,20,30,40]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :total="totalCount"
       ></Pagination>
     </div>
   </div>
@@ -37,7 +37,7 @@ export default {
       TimeConversion: TimeConversion,
       currentPage: 1,
       pageSize: 10,
-      total: 1,
+      totalCount: 1,
     };
   },
   props: ["getData"],
@@ -45,7 +45,6 @@ export default {
     Pagination
   },
   created: function() {
-    // this.getData("PageArticle.getList", { num: this.pageSize, page: this.currentPage }, this.successFun);
     this.getList(this.pageSize, this.currentPage);
   },
   methods: {
@@ -56,7 +55,7 @@ export default {
       this.dataList = res.result.data;
       this.currentPage  =  res.result.page;
       this.pageSize = res.result.num;
-      this.total = parseInt(res.result.total)* parseInt(res.result.num);
+      this.totalCount = res.result.totalCount
     },
     dealContent(html) {
       const dd = html.replace(/<\/?.+?>/g, "");
@@ -64,12 +63,10 @@ export default {
       return str;
     },
     handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
          this.pageSize = val;
          this.getList(val, this.currentPage);
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
          this.currentPage = val;
          this.getList(this.pageSize, val);
       }

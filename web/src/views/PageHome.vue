@@ -8,7 +8,6 @@
     <Footer />
   </div>
 </template>
-   
   <script >
 import "../css/PageHome.less";
 import Header from "../common/Header.vue";

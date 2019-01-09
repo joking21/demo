@@ -99,12 +99,16 @@ export default {
       this.postData(
         "PagePublish.addArticle",
         data,
-        this.changeLoad,
+        this.successPublish,
         this.changeLoad
       );
     },
     changeLoad() {
       this.loading = false;
+    },
+    successPublish() {
+      this.loading = false;
+      this.$router.push({path:'/article'});
     },
     getType(res) {
       this.typeData = res.result;

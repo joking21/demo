@@ -1,13 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import homePage from './views/PageHome.vue';
-import aboutPage from './views/PageAbout.vue';
-import login from './views/PageLogin.vue';
-import publish from './views/PagePublish.vue';
-import leave from './views/PageLeave.vue';
-import articleContent from './views/PageContent.vue';
+import PageHome from './views/PageHome.vue';
+import PageAbout from './views/PageAbout.vue';
+import PageLogin from './views/PageLogin.vue';
+import PagePublish from './views/PagePublish.vue';
+import PageLeave from './views/PageLeave.vue';
+import PageContent from './views/PageContent.vue';
 import Register from './views/PageRegister.vue';
-import article from './views/PageArticle.vue';
+import PageArticle from './views/PageArticle.vue';
+import PagePersonal from './views/PagePersonal.vue'
 
 Vue.use(Router)
 
@@ -16,15 +17,15 @@ export default new Router({
     routes:[
         {
             path:'/',
-            component:homePage
+            component:PageHome
         },
         {
             path:'/about',
-            component:aboutPage
+            component:PageAbout
         },
         {
             path:'/login',
-            component:login,
+            component:PageLogin,
             meta:{
                 loginIs:true
             }
@@ -35,23 +36,27 @@ export default new Router({
         },
         {
             path:'/publish',
-            component:publish,
+            component:PagePublish,
             meta:{
                 requireAuth:true
             }
         },
         {
             path:'/leaveam',
-            component:leave,
+            component:PageLeave,
         },
         {
             name: 'articleContent',
             path:'/article/detail/:id',
-            component:articleContent
+            component:PageContent
         },
         {
             path:'/article',
-            component:article
+            component:PageArticle
+        },
+        {
+            path:'/personal',
+            component:PagePersonal
         },
     ]
 })

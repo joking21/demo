@@ -5,6 +5,7 @@ module.exports = {
       user:'root',
       password:'Joking1995',
       database:'web',
-      port: 3306
+      port: 3306,
+      timezone:"08:00"
   }
 };

@@ -9,7 +9,7 @@ const _sql = {
         ' user.name as userName,' +
         ' articleType.name as typeName' +
         ' from article,articleType,user' +
-        ' where article.userId = user.id and article.typeId = articleType.id order by time desc limit 10',
+        ' where article.userId = user.id and article.typeId = articleType.id and article.power = 1 order by time desc limit 10',
 
     selectContent: 'select article.id, article.title, article.content, article.time,article.userId, article.typeId,' +
         ' user.name as userName,' +
@@ -25,9 +25,7 @@ const _sql = {
         ' user.name as userName,' +
         ' articleType.name as typeName' +
         ' from article,articleType,user' +
-        ' where article.userId = user.id and article.typeId = articleType.id order by time desc',
-
-    //    select * from table limit (start-1)*limit
+        ' where article.userId = user.id and article.typeId = articleType.id and article.power = 1 order by time desc',
 
 };
 module.exports = {
@@ -82,6 +80,7 @@ module.exports = {
                         total,
                         page,
                         num,
+                        totalCount: result.length,
                     }
                     _util.getJsonWrite(res, tempData);
                 }else{
