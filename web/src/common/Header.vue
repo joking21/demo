@@ -46,7 +46,7 @@ export default {
     loginOut() {
       sessionStorage.removeItem("token");
       this.$store.commit("changeName");
-      location.reload();
+      location.href = '/';
     }
   },
   computed: {

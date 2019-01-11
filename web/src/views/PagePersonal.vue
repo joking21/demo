@@ -9,7 +9,7 @@
     </Header>
     <Main>
         <div v-if='this.$store.state.personal==="1"'>
-           <Information />
+           <Information :postData='postData'/>
         </div>
          <div v-if='this.$store.state.personal==="2"'>
            222

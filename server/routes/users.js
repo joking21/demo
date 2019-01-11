@@ -11,4 +11,7 @@ router.post('/add', function(req, res, next) {
 router.get('/login', function(req, res, next){
   users.selectUser(req, res, next);
 })
+router.get('/selectUser', function(req, res, next){
+  users.selectUserInfo(req, res, next);
+})
 module.exports = router;

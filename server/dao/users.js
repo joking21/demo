@@ -5,7 +5,8 @@ const pool  = mysql.createPool(_conf.mysql);
 const _sql = {
     selectAll: 'select * from user',
     insert: 'INSERT INTO user(name,password) VALUES(?,?)',
-    selectUser: 'select * from user where name=? and password=?'
+    selectUser: 'select * from user where name=? and password=?',
+    selectUserById: 'select * from user where id = ?',
 };
 module.exports = {
     selectall: function (req, res, next) {
@@ -41,6 +42,15 @@ module.exports = {
                         result:result
                     });
                 }
+                connection.release();
+            });
+        });
+    },
+    selectUserInfo: function(req, res, next) {
+        pool.getConnection(function(err, connection) {
+            var param = req.body;
+            connection.query(_sql.selectUserById, [param.id], function(err, result) {
+                _util.postJsonWrite(res, result);
                 connection.release();
             });
         });

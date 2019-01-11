@@ -1,5 +1,8 @@
 const api = {
     // 登录
+    PageCommon: {
+      imageUpload: '/files/upload/image',
+    },
     PageLogin: {
         userSelect: '/users/selectall', //查询所有用户
         userAdd: '/users/add', // 用户新增
@@ -19,5 +22,8 @@ const api = {
          getContent: '/articles/article/info', //详情
          getList: '/articles/article/all'
     },
+    PagePersonal: {
+        getUser:'/users/selectUser'
+    }
 }
 export default api;

@@ -9,7 +9,10 @@ function parseUrl(url) {
     return prefix + tempUrl;
 }
 export function postData(url, para, successFun, errorFun) {
-    axios.post(parseUrl(url), para)
+    console.log(111,para);
+    axios.post(parseUrl(url), para, {
+        headers:{'Content-Type':'multipart/form-data'}
+    })
         .then(function (response) {
             if (response.data.code === 200) {
                 success(response.data.msg);
