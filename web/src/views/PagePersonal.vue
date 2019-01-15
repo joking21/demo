@@ -9,7 +9,7 @@
     </Header>
     <Main>
         <div v-if='this.$store.state.personal==="1"'>
-           <Information :postData='postData'/>
+           <Information />
         </div>
          <div v-if='this.$store.state.personal==="2"'>
            222
@@ -33,15 +33,12 @@
 import dHeader from "../common/Header.vue";
 import dFooter from "../common/Footer.vue";
 import dAside from "../common/Aside.vue";
-// import Publish from "../components/pagePublish/Publish.vue";
-import { postData, getData } from "../util/request";
 import { Container, Aside, Header, Main, Footer } from 'element-ui';
 import Information from "../components/pagePersonal/Information.vue"
 export default {
   data() {
     return {
-      postData: postData,
-      getData: getData,
+
     };
   },
   components: {

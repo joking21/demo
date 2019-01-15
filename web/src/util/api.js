@@ -1,12 +1,13 @@
 const api = {
-    // 登录
+
     PageCommon: {
-      imageUpload: '/files/upload/image',
+      imageUpload: '/files/upload/image',   // 图片上传
     },
+    // 登录
     PageLogin: {
         userSelect: '/users/selectall', //查询所有用户
         userAdd: '/users/add', // 用户新增
-        login: '/users/login' //添加用户
+        login: '/users/login', //添加用户
     },
     // 首页
     PageHome: {
@@ -23,7 +24,9 @@ const api = {
          getList: '/articles/article/all'
     },
     PagePersonal: {
-        getUser:'/users/selectUser'
+        getUser:'/users/selectUser', // 查询某个用户
+        updateUser: '/users/updateUser', // 更新用户
+        getImg: '/files/image',
     }
 }
 export default api;

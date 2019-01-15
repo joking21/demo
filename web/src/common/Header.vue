@@ -3,10 +3,10 @@
     <router-link v-if="personal"  to="/">
       <i class="icon-fanhui iconfont" style="z-index: 100; font-size: 26px; font-weight: 600; position: absolute;"/>
     </router-link>
-    <div v-if="token" class="has-user">
+    <div v-if="userInformation" class="has-user">
       <Menu class="el-menu-demo header-menu-demo" mode="horizontal">
         <Submenu index="1">
-          <template slot="title">{{JSON.parse(token).name}}</template>
+          <template slot="title">{{JSON.parse(userInformation).name}}</template>
           <MenuItem class="header-menu-itme" index="1-1">
             <router-link to='/personal'> 个人中心 </router-link>
           </MenuItem>
@@ -44,14 +44,14 @@ export default {
   props: ['personal'],
   methods: {
     loginOut() {
-      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("userInformation");
       this.$store.commit("changeName");
       location.href = '/';
     }
   },
   computed: {
-    token() {
-      return this.$store.state.token;
+    userInformation() {
+      return this.$store.state.userInformation;
     }
   }
 };

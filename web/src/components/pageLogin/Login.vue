@@ -42,7 +42,7 @@ export default {
       );
     },
     dealUser(res) {
-      sessionStorage.setItem("token", JSON.stringify(res.result[0]));
+      sessionStorage.setItem("userInformation", JSON.stringify(res.result[0]));
       this.$store.commit("changeName");
       location.href = "/";
     }

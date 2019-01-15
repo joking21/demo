@@ -5,14 +5,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state:{
     count:0,
-    token:'',
+    userInformation:'',
     personal: '1',
   },
   mutations:{
     increment:state => state.count ++,
     decrement:state => state.count --,
     changeName(state){
-      state.token = sessionStorage.getItem('token');
+      state.userInformation = sessionStorage.getItem('userInformation');
     },
     changePersonal(state, index){
       console.log(index);

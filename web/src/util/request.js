@@ -8,11 +8,13 @@ function parseUrl(url) {
     const tempUrl = api[urlParent][childParent];
     return prefix + tempUrl;
 }
+axios.defaults.headers = {
+    // "Content-Type": "application/json; charset=UTF-8"
+    'Content-Type': 'application/x-www-form-urlencoded'
+}
+// axios.defaults.headers.get['content-Type'] = 'appliction/x-www-form-urlencoded';
 export function postData(url, para, successFun, errorFun) {
-    console.log(111,para);
-    axios.post(parseUrl(url), para, {
-        headers:{'Content-Type':'multipart/form-data'}
-    })
+    axios.post(parseUrl(url), para)
         .then(function (response) {
             if (response.data.code === 200) {
                 success(response.data.msg);
@@ -32,6 +34,40 @@ export function getData(url, para, successFun, errorFun) {
     axios.get(parseUrl(url), {
         params: para
     })
+        .then(function (response) {
+            if (response.data.code === 200) {
+                if (successFun) successFun(response.data);
+            } else {
+                if (errorFun) errorFun();
+                failer(response.data.msg);
+            }
+        })
+        .catch(function (error) {
+            if (errorFun) errorFun();
+            failer(error.response.data);
+        });
+}
+
+export function uploadFile(url, para, successFun, errorFun) {
+    axios.post(parseUrl(url), para, {
+        'Content-Type': 'multipart/form-data'
+    })
+        .then(function (response) {
+            if (response.data.code === 200) {
+                success(response.data.msg);
+                if (successFun) successFun();
+            } else {
+                if (errorFun) errorFun();
+                failer(response.data.msg);
+            }
+        })
+        .catch(function (error) {
+            if (errorFun) errorFun();
+            failer(error.response.data);
+        });
+}
+export function getFile(url, para, successFun, errorFun) {
+    axios.get(`${parseUrl(url)}/${para}`)
         .then(function (response) {
             if (response.data.code === 200) {
                 if (successFun) successFun(response.data);

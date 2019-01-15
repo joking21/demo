@@ -90,7 +90,7 @@ export default {
       }
       this.loading = true;
       const data = {
-        userId: JSON.parse(sessionStorage.getItem("token")).id,
+        userId: JSON.parse(sessionStorage.getItem("userInformation")).id,
         title: this.title,
         content: this.content,
         typeId: this.type,

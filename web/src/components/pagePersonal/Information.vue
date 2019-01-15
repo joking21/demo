@@ -2,34 +2,51 @@
   <div class="personal">
     <div class="show-info" v-if="!revise">
       <div>
-        <img class="img-show" src="../../assets/test1.jpg" alt>
+        <img :src="imageUrl" class="img-show">
       </div>
-      <div>用户名: &nbsp;&nbsp;******</div>
-      <div>密&nbsp;码:&nbsp;&nbsp;******</div>
+      <div>用户名: &nbsp;&nbsp;{{name}}</div>
+      <div>密&nbsp;码:&nbsp;&nbsp;*****</div>
       <div>
-        <Button plain size="small" @click="reviseFun">修&nbsp;&nbsp;改</Button>
+        <Button plain size="small" @click="reviseFun(true)">修&nbsp;&nbsp;改</Button>
       </div>
     </div>
     <div v-if="revise">
-      <div>
-        <Upload
-          class="avatar-uploader"
-          :http-request='uploadSectionFile'
-          :show-file-list="false"
-          action=''
-          :before-upload="beforeAvatarUpload"
-          ref="upload"
-        >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </Upload>
-      </div>
-      <div>用户名：
-        <Input v-model="name" placeholder="请输入用户名"/>
-      </div>
-      <div>密码：
-        <Input v-model="password" placeholder="请输入用户名"/>
-      </div>
+      <Form
+        label-width="100px"
+        :rules="rules2"
+        style="width: 500px; margin: 0 auto;"
+        ref="userForm"
+        :model="userForm"
+      >
+        <FormItem label="头像：">
+          <div>
+            <Upload
+              class="avatar-uploader"
+              :http-request="uploadSectionFile"
+              :show-file-list="false"
+              action
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img v-if="imageUrl" :src="imageUrl" class="img-show">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </Upload>
+          </div>
+        </FormItem>
+        <FormItem label="用户名：" prop="name">
+          <Input v-model="name" readonly/>
+        </FormItem>
+        <FormItem label="密码：" prop="password">
+          <Input type="password" v-model="userForm.password" autocomplete="off"/>
+        </FormItem>
+        <FormItem label="确认密码：" prop="confirmPassword">
+          <Input type="password" v-model="userForm.confirmPassword" autocomplete="off"/>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="submit">修改</Button>
+          <Button @click="reviseFun(false)">取消</Button>
+        </FormItem>
+      </Form>
     </div>
   </div>
 </template>
@@ -39,84 +56,92 @@
     line-height: 40px;
     text-align: center;
     font-size: 16px;
-    .img-show {
-      width: 100px;
-      height: 100px;
-      border: 1px solid #ff0000;
-      display: inline-block;
-      border-radius: 100px;
-    }
+  }
+  .img-show {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ff0000;
+    display: inline-block;
+    border-radius: 100px;
   }
 }
 </style>
 <script>
-import { Input, Button, Upload } from "element-ui";
+import { Input, Button, Upload, Form, FormItem } from "element-ui";
 import axios from "axios";
+import { parseImg } from "../../util/util";
+import { uploadFile, getData } from "../../util/request";
+import { warningTip } from "../../util/notice";
 export default {
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        if (this.userForm.confirmPassword !== "") {
+          this.$refs.userForm.validateField("confirmPassword");
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.userForm.password) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        callback();
+      }
+    };
     return {
       name: "",
       password: "",
+      confirmPassword: "",
       revise: false,
-      imageUrl: ''
+      imageUrl: "",
+      imgData: "",
+      userForm: {
+        password: "",
+        confirmPassword: ""
+      },
+      rules2: {
+        password: [{ validator: validatePass, trigger: "change" }],
+        confirmPassword: [{ validator: validatePass2, trigger: "change" }]
+      }
     };
   },
-  props:['postData'],
   components: {
     Input,
     Button,
-    Upload
+    Upload,
+    Form,
+    FormItem
+  },
+  created: function() {
+    getData(
+      "PagePersonal.getUser",
+      { id: JSON.parse(sessionStorage.getItem("userInformation")).id },
+      this.handleUser
+    );
   },
   methods: {
-    reviseFun() {
-      this.revise = true;
+    reviseFun(bull) {
+      this.revise = bull;
     },
-    uploadSectionFile(param){
-      console.log(param.file);
-      // return true;
-      // console.log(JSON.stringify(param.file))
-      // lastModified: 1547025602927
-      // lastModifiedDate: Wed Jan 09 2019 17:20:02 GMT+0800 (中国标准时间) {}
-      // name: "test1.jpg"
-      // size: 16020
-      // type: "image/jpeg"
-      // uid: 1547111577518
-      // webkitRelativePath: ""
-      // this.postData('PageCommon.imageUpload',param.file, this.successFun )
-
-       const formData = new FormData();
-        const file = this.$refs.upload.uploadFiles[0];
-        console.log(file);
-        const headerConfig = { 'Content-Type': 'multipart/form-data' };
-        if (!file) { // 若未选择文件
-          alert('请选择文件');
-          return;
-        }
-        formData.append('file', param.file);
-        //  formData.append('file', file);
-        // console.log(formData);
-        // formData.append('name', this.name);
-        // formData.append('age', this.age);
-        // this.$http.post('/files/upload/image', formData, headerConfig).then(res => {
-        //   console.log(res);
-        // })
-        console.log(formData);
-            axios.post('/dw/files/upload/image', formData, headerConfig)
-        .then(function (response) {
-         console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-          
-        });
+    uploadSectionFile(param) {
+      this.imgData = param.file;
+      param.onSuccess("OK");
     },
-    successFun(res){
-      consle.log(res);
+    successFun(res) {
+      this.reviseFun(false);
+      getData(
+      "PagePersonal.getUser",
+      { id: JSON.parse(sessionStorage.getItem("userInformation")).id },
+      this.handleUser
+    );
     },
     handleAvatarSuccess(res, file) {
-      console.log(file);
       this.imageUrl = URL.createObjectURL(file.raw);
-      console.log(this.imageUrl);
     },
     beforeAvatarUpload(file) {
       console.log(file);
@@ -130,6 +155,34 @@ export default {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
       return isJPG && isLt2M;
+    },
+    submit() {
+      this.$refs["userForm"].validate(valid => {
+        if (valid) {
+          const formData = new FormData();
+          formData.append("file", this.imgData);
+          formData.append(
+            "userId",
+            JSON.parse(sessionStorage.getItem("userInformation")).id
+          );
+          formData.append("userName", this.name);
+          formData.append("userPassword", this.userForm.password);
+          uploadFile("PagePersonal.updateUser", formData, this.successFun);
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    handleUser(res) {
+      this.imageUrl = parseImg(res.result[0] && res.result[0].img);
+      this.name = res.result[0] && res.result[0].name;
+      this.password = res.result[0] && res.result[0].password;
+      this.confirmPassword = res.result[0] && res.result[0].password;
+      this.userForm = {
+        password: res.result[0] && res.result[0].password,
+        confirmPassword: res.result[0] && res.result[0].password
+      };
     }
   }
 };
