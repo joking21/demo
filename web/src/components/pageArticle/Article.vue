@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="new-info" v-for="item in dataList">
+    <div class="new-info" v-for="item in dataList" :key='item.id'>
       <div class="info-title">
         <router-link :to="`/article/detail/${item.id}`">{{item.title}}</router-link>
       </div>

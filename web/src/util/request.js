@@ -9,10 +9,8 @@ function parseUrl(url) {
     return prefix + tempUrl;
 }
 axios.defaults.headers = {
-    // "Content-Type": "application/json; charset=UTF-8"
-    'Content-Type': 'application/x-www-form-urlencoded'
+    "Content-Type": "application/json; charset=UTF-8"
 }
-// axios.defaults.headers.get['content-Type'] = 'appliction/x-www-form-urlencoded';
 export function postData(url, para, successFun, errorFun) {
     axios.post(parseUrl(url), para)
         .then(function (response) {

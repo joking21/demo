@@ -27,7 +27,7 @@
       </div>
     </div>
     <VueEditor id="editor1" v-model="content"></VueEditor>
-    <div style="margin-top: 15px; text-align: center;">
+    <div v-if="!resFun" style="margin-top: 15px; text-align: center;">
       <Button
         :loading="loading"
         style="width: 118px;"
@@ -35,6 +35,22 @@
         plain
         @click="submitFun"
       >发&nbsp;&nbsp;布</Button>
+    </div>
+    <div v-else style="margin-top: 15px; text-align: center;">
+      <Button
+        :loading="loading"
+        style="width: 118px;"
+        type="primary"
+        plain
+        @click="submitFun"
+      >确认修改</Button>
+      <Button
+        :loading="loading"
+        style="width: 118px;"
+        type="danger"
+        plain
+        @click="cancelRes"
+      >取消</Button>
     </div>
   </div>
 </template>
@@ -58,18 +74,21 @@
 import { Radio, Input, Button, Tooltip, Select, Option } from "element-ui";
 import { VueEditor } from "vue2-editor";
 import { warningTip } from "../../util/notice";
+import { postData, getData } from "../../util/request";
 export default {
   data() {
     return {
-      content: "<h4>It is a great day!</h4>",
-      radio: "1",
-      title: "",
+      content: this.resContent
+        ? this.resContent
+        : "<h4>It is a great day!</h4>",
+      radio: this.resPower ? this.resPower : "1",
+      title: this.resTitle,
       typeData: [],
-      type: 1,
+      type: this.resTypeId ? this.resTypeId : 1,
       loading: false
     };
   },
-  props: ["postData", "getData"],
+  props: ["resTitle", "resContent", "resTypeId", "resPower", "resFun", "articleId", 'cancelRes', 'resvise'],
   components: {
     VueEditor,
     Radio,
@@ -80,7 +99,7 @@ export default {
     Option
   },
   created: function() {
-    this.getData("PagePublish.getType", null, this.getType);
+    getData("PagePublish.getType", null, this.getType);
   },
   methods: {
     submitFun() {
@@ -96,19 +115,27 @@ export default {
         typeId: this.type,
         power: this.radio
       };
-      this.postData(
-        "PagePublish.addArticle",
-        data,
-        this.successPublish,
-        this.changeLoad
-      );
+      if(this.resFun) data.id = this.articleId;
+      const url = this.resFun ? 'PagePersonal.updateArticle' : 'PagePublish.addArticle'
+       postData(
+          url,
+          data,
+          this.successPublish,
+          this.changeLoad
+        );
     },
     changeLoad() {
       this.loading = false;
     },
     successPublish() {
       this.loading = false;
-      this.$router.push({path:'/article'});
+      if (this.resFun) {
+        // 修改
+        this.resFun();
+      } else {
+        this.$store.commit('changePersonal', '2');
+        // this.$router.push({ path: "/article" });
+      }
     },
     getType(res) {
       this.typeData = res.result;

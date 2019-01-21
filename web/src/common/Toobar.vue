@@ -6,7 +6,7 @@
         首页
       </router-link>
       <router-link class="nav-item" to="/about">关于我</router-link>
-      <router-link class="nav-item" to="/publish">发表文章</router-link>
+      <!-- <router-link class="nav-item" to="/publish">发表文章</router-link> -->
       <router-link class="nav-item" to="/leaveam">留言</router-link>
     </div>
   </div>

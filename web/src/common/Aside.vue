@@ -4,7 +4,7 @@
     @close="handleClose"-->
     <Menu
       style="border-right: none"
-      default-active="1"
+      :default-active="this.$store.state.personal"
       class="el-menu-vertical-demo"
       background-color="#545c64"
       text-color="#fff"

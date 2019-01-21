@@ -28,7 +28,7 @@
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="img-show">
+              <img v-if="userForm.imageUrl" :src="userForm.imageUrl" class="img-show">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </Upload>
           </div>
@@ -60,7 +60,6 @@
   .img-show {
     width: 100px;
     height: 100px;
-    border: 1px solid #ff0000;
     display: inline-block;
     border-radius: 100px;
   }
@@ -72,6 +71,7 @@ import axios from "axios";
 import { parseImg } from "../../util/util";
 import { uploadFile, getData } from "../../util/request";
 import { warningTip } from "../../util/notice";
+import defaultImg from "../../assets/default.jpg";
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -102,7 +102,8 @@ export default {
       imgData: "",
       userForm: {
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        imageUrl: ""
       },
       rules2: {
         password: [{ validator: validatePass, trigger: "change" }],
@@ -135,13 +136,13 @@ export default {
     successFun(res) {
       this.reviseFun(false);
       getData(
-      "PagePersonal.getUser",
-      { id: JSON.parse(sessionStorage.getItem("userInformation")).id },
-      this.handleUser
-    );
+        "PagePersonal.getUser",
+        { id: JSON.parse(sessionStorage.getItem("userInformation")).id },
+        this.handleUser
+      );
     },
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+      this.userForm.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
       console.log(file);
@@ -175,13 +176,20 @@ export default {
       });
     },
     handleUser(res) {
-      this.imageUrl = parseImg(res.result[0] && res.result[0].img);
+      this.imageUrl =
+        res.result[0] && res.result[0].img
+          ? parseImg(res.result[0] && res.result[0].img)
+          : defaultImg;
       this.name = res.result[0] && res.result[0].name;
       this.password = res.result[0] && res.result[0].password;
       this.confirmPassword = res.result[0] && res.result[0].password;
       this.userForm = {
         password: res.result[0] && res.result[0].password,
-        confirmPassword: res.result[0] && res.result[0].password
+        confirmPassword: res.result[0] && res.result[0].password,
+        imageUrl:
+          res.result[0] && res.result[0].img
+            ? parseImg(res.result[0] && res.result[0].img)
+            : defaultImg
       };
     }
   }

@@ -3,7 +3,6 @@ import Router from 'vue-router';
 import PageHome from './views/PageHome.vue';
 import PageAbout from './views/PageAbout.vue';
 import PageLogin from './views/PageLogin.vue';
-import PagePublish from './views/PagePublish.vue';
 import PageLeave from './views/PageLeave.vue';
 import PageContent from './views/PageContent.vue';
 import Register from './views/PageRegister.vue';
@@ -33,13 +32,6 @@ export default new Router({
         {
             path:'/register',
             component:Register,
-        },
-        {
-            path:'/publish',
-            component:PagePublish,
-            meta:{
-                requireAuth:true
-            }
         },
         {
             path:'/leaveam',

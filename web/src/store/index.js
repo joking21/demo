@@ -15,7 +15,6 @@ export default new Vuex.Store({
       state.userInformation = sessionStorage.getItem('userInformation');
     },
     changePersonal(state, index){
-      console.log(index);
       state.personal = index;
     }
   }

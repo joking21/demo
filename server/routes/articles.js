@@ -18,4 +18,16 @@ router.get('/article/info', function(req, res, next) {
 router.get('/article/all', function(req, res, next) {
   article.getAllArticle(req, res, next);
 });
+router.get('/article/me', function(req, res, next) {
+  article.getSelectByMe(req, res, next);
+});
+router.post('/article/update', function(req, res, next) {
+  article.updateArticle(req, res, next);
+});
+router.get('/article/admin/byAll', function(req, res, next) {
+  article.getAllArticleByAdmin(req, res, next);
+});
+router.get('/article/delete', function(req, res, next) {
+  article.deleteArticle(req, res, next);
+});
 module.exports = router;

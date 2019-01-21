@@ -9,10 +9,8 @@ const _sql = {
     insert: 'INSERT INTO user(name,password) VALUES(?,?)',
     selectUser: 'select * from user where name=? and password=?',
     selectUserById: 'select * from user where id = ?',
-    update: 'UPDATE user SET name = ?, password = ?, img = ? WHERE id = ?',
 };
 function isUpdate(name, password, img, id) {
-    // return `UPDATE user SET ${name ? 'name = '+name : ''} ${password ? ', password = '+password : ''} ${img ? ', img = '+img : ''} WHERE id = `+id
     return `UPDATE user SET ${name ? 'name = ?' : ''}${password ? ', password = ? ' : ''} ${img ? ', img = ?' : ''} WHERE id = ?`
 }
 module.exports = {

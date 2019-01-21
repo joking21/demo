@@ -7,7 +7,7 @@
       </span>
     </div>
     <Row>
-      <Col :span="12" v-for="item in articleList">
+      <Col :span="12" v-for="item in articleList" :key='item.id'>
         <div class="new-info">
           <div class="info-title">
             <router-link :to="`/article/detail/${item.id}`">{{item.title}}</router-link>

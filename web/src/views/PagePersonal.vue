@@ -12,10 +12,10 @@
            <Information />
         </div>
          <div v-if='this.$store.state.personal==="2"'>
-           222
+           <MyArticle />
         </div>
          <div v-if='this.$store.state.personal==="3"'>
-           333
+           <Publish />
         </div>
     </Main>
     <Footer style="height: auto; padding: 0px;" class="personal">
@@ -34,7 +34,9 @@ import dHeader from "../common/Header.vue";
 import dFooter from "../common/Footer.vue";
 import dAside from "../common/Aside.vue";
 import { Container, Aside, Header, Main, Footer } from 'element-ui';
-import Information from "../components/pagePersonal/Information.vue"
+import Information from "../components/pagePersonal/Information.vue";
+import MyArticle from "../components/pagePersonal/MyArticle.vue";
+import Publish from "../components/pagePersonal/Publish.vue";
 export default {
   data() {
     return {
@@ -50,7 +52,9 @@ export default {
     dHeader,
     dFooter,
     dAside,
-    Information
+    Information,
+    MyArticle,
+    Publish
   }
 };
 </script>

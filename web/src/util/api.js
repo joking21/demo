@@ -23,10 +23,14 @@ const api = {
          getContent: '/articles/article/info', //详情
          getList: '/articles/article/all'
     },
+    // 个人中心
     PagePersonal: {
         getUser:'/users/selectUser', // 查询某个用户
         updateUser: '/users/updateUser', // 更新用户
-        getImg: '/files/image',
+        getImg: '/files/image',  // 获取上传图片
+        getArticleByme: '/articles/article/me', // 获取个人文章
+        updateArticle: '/articles/article/update', // 修改文章
+        deleteArticle: '/articles/article/delete', // 删除文章
     }
 }
 export default api;
