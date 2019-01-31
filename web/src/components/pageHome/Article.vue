@@ -14,9 +14,16 @@
           </div>
           <div class="info-content">{{dealContent(item.content)}}</div>
           <div class="info-attribute">
+            <!-- <span><i class="iconfont icon-gaojian-zuozhe" title="作者"></i>{{item.userName}}</span>
+            <span><i class="iconfont icon-shijian" title="时间"></i>{{item.time}}</span>
+            <span><i class="iconfont icon-wenjianleixingpeizhi" title="类型"></i>{{item.typeName}}</span>
+            <span><i class="iconfont icon-review" title="预览"></i>{{item.preview}}</span>
+            <span><i class="iconfont icon-pinglun" title="评论"></i>200</span> -->
             <span>作者：{{item.userName}}</span>
             <span>时间：{{item.time}}</span>
             <span>类型：{{item.typeName}}</span>
+            <span>预览：{{item.preview}}</span>
+            <span>评论：200</span>
           </div>
         </div>
       </Col>

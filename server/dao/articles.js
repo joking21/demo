@@ -62,7 +62,6 @@ module.exports = {
         });
     },
     getNewArticle: function (req, res, next) {
-        console.log(req);
         pool.getConnection(function (err, connection) {
             connection.query(_sql.selectNew, function (err, result) {
                 _util.getJsonWrite(res, result);
@@ -82,12 +81,8 @@ module.exports = {
         });
     },
     setPreview: function (id) {
-        // setPreview
-        console.log(id);
         pool.getConnection(function (err, connection) {
             connection.query(_sql.setPreview, [id], function (err, result) {
-                console.log(err);
-                console.log(result);
                 connection.release();
             });
         });
