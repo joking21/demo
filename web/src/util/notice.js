@@ -11,7 +11,7 @@ export function failer(msg) {
     Notification({
         title: '错误',
         dangerouslyUseHTMLString: true,
-        message: '<div v-html='+msg+'></div>',
+        message: msg,
         type: 'error',
         duration: 3000,
     });
