@@ -7,7 +7,8 @@ import PageLeave from './views/PageLeave.vue';
 import PageContent from './views/PageContent.vue';
 import Register from './views/PageRegister.vue';
 import PageArticle from './views/PageArticle.vue';
-import PagePersonal from './views/PagePersonal.vue'
+import PagePersonal from './views/PagePersonal.vue';
+import PageTest from './views/PageTest.vue'
 
 Vue.use(Router)
 
@@ -49,6 +50,10 @@ export default new Router({
         {
             path:'/personal',
             component:PagePersonal
+        }, 
+        {
+            path:'/test',
+            component:PageTest
         },
     ]
 })
