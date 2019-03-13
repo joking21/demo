@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import PageHome from './views/PageHome.vue';
 import PageAbout from './views/PageAbout.vue';
 import PageLogin from './views/PageLogin.vue';
-import PageLeave from './views/PageLeave.vue';
+import PageLeaveAm from './views/PageLeaveAm.vue';
 import PageContent from './views/PageContent.vue';
 import Register from './views/PageRegister.vue';
 import PageArticle from './views/PageArticle.vue';
@@ -36,7 +36,7 @@ export default new Router({
         },
         {
             path:'/leaveam',
-            component:PageLeave,
+            component:PageLeaveAm,
         },
         {
             name: 'articleContent',
