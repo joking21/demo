@@ -1,14 +1,10 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge(common, {
     devtool: 'inline-source-map',
-    plugins: [
-        new webpack.DefinePlugin({
-            "process.env": require('./config/dev.env.js')
-        })
-    ],
     devServer: {
         // contentBase: path.join(__dirname, "dist"),
         contentBase: './dist',
@@ -27,4 +23,10 @@ module.exports = merge(common, {
             }
         },
     },
+    plugins: [
+        new ExtractTextPlugin("styles/[name].css"),
+        new webpack.DefinePlugin({
+            "process.env": require('./config/dev.env.js')
+        })
+    ],
 });
