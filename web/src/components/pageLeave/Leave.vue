@@ -15,7 +15,11 @@
 <script>
 import { Card, Row, Col } from "element-ui";
 export default {
-  data() {},
+  data() {
+    return{
+      
+    }
+  },
   components: {
     Card,
     Row,

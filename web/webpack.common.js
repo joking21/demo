@@ -34,10 +34,10 @@ module.exports = {
             {
                 test: /\.(png)|(jpg)|(gif)|(woff)|(svg)|(eot)|(ttf)|(woff2)/,
                 use: [{
-                    loader: 'file-loader',
+                    loader: 'url-loader',
                     options: {
-                        limit: 10000,
-                        outputPath: '/assets',
+                        limit: 50,
+                        outputPath: 'assets',
                         // publicPath: '/assets',
                     },
                 }],
@@ -59,10 +59,6 @@ module.exports = {
                     'less-loader'
                 ]
             },
-            // {
-            //     test: /\.(jpe?g|png|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
-            //     loader: 'url-loader?limit=100000'
-            // }
         ]
     },
     resolve: {
